@@ -956,21 +956,144 @@ order.productName = 'Phone'
 //order.password ='test'
 console.log(order);
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Hierachy : HAS-A dependency injection && is-a : inheritance
+..........................................................
 
 
 
+//has-a and dependency injection
+
+class Product {
+    constructor(public id:number=1,public name:string='default'){
+
+    }
+}
+class Order{
+   //has-a 
+   constructor(public orderId:number=1,public product:Product=new Product()){
+
+   }
+}
+//
+let product = new Product(23,'Phone');
+
+//dependency injection : object reference is bound with other objects
+let order = new Order(3333,product);
+
+console.log(order.orderId,order.product.name);
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+IS-A : Inheritance:
+
+implementation
+1.class based inheritance
+2.interfaces
+
+//interface : generic class can be used with any class implementations.
+
+interface CalculateInterest{
+    calculateInterest():number;
+}
+
+//inheritance
+abstract class Account implements CalculateInterest{
+     constructor(){
+         console.log('Account class')
+     }
+//  //override
+  public calculateInterest():number{
+       return 10;
+  }
+  //abstract methods
+  abstract withdraw():number;
+}
+class SavingsAccount extends Account{
+    constructor(){
+        super();
+      console.log('Savings account')
+    }
+  //overriding(method definining)
+  public calculateInterest():number{
+    return 100 * super.calculateInterest();
+  }
+  withdraw(){
+      return 1000;
+  }
+}
+let sb = new SavingsAccount();
+console.log(sb.calculateInterest());
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Advanced types:
+
+1.Object type
+
+literal object  and how to set type for that
 
 
+let emp = {
+    id:1,
+    name:'subramanian'
+};
+
+object types :
+
+1.class as type.
+
+class EmployeeType{
+  //properties
+  id:number;
+  name:string;
+}
+
+let emp:EmployeeType = {
+    id:1,
+    name:'Subramanian'
+    //name:3434
+};
+
+///i am going to design type class for employee.
+
+id,name,city,state,country,department,salary
 
 
+Note:
+ when you create object from the type, you should have all the properties which have 
+represented type class.
+
+i dont want all the fields, based on req, i may skip some fields
+
+Types of properties
+ ->Optional properties - ?
+ ->required properties
 
 
+class EmployeeType{
+  //required properties
+  id:number;
+  name:string;
+  //optional properties
+  city?:string;
+  state?:string;
+  salary?:number;
+}
 
+let emp:EmployeeType = {
+    id:1,
+    name:'Subramanian'
+    //name:3434
+};
 
-
-
-
-
+let emp1:EmployeeType = {
+    id:1,
+    name:'Subramanian',
+    salary:8999
+    //name:3434
+};
 
 
 
