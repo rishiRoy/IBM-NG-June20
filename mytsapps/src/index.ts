@@ -1,12 +1,41 @@
-import TodoService from './services/TodoService';
 
+//decorator declaration
+// function Course(target:any){
+//   //decorator logic : course name
+//   Object.defineProperty(target.prototype,"subject",{
+//       value:'Typescript'
+//   });
 
-function main(){
+// }
+//syntax
 
-    //create TodoService Object and invoke findall method
-    let todoService = new TodoService();
-    let todos = todoService.findAllTodos();
-    console.log(todos);
+function Course(subject:string){
+    //decorator logic : course name
 
+    return function(target:any){
+        Object.defineProperty(target.prototype,"subject",{
+            value:subject
+        });
+    }
+    
+  
 }
-main();
+//attach decorator on class
+class StudentType{
+    name:string;
+    subject:string;
+}
+
+@Course('React and Node')
+//@Course({subject:'test',courseId:'',duration:5})
+class Student{
+    constructor(public name:string="default"){}
+}
+//student details
+//let student = new Student("Subramanian") as StudentType;
+let student = new Student("Subramanian") as any;
+console.log(`${student.name} is learning ${student.subject}`);
+
+
+
+
